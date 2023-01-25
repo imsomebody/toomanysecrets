@@ -16,6 +16,7 @@ async function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
+      preload: 'preload.js',
       // Required for Spectron testing
       enableRemoteModule: !!process.env.IS_TEST,
 
