@@ -12,10 +12,16 @@
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
+  },
   "main": "background.js",
   "dependencies": {
     "@mdi/font": "5.9.55",
     "core-js": "^3.8.3",
+    "fs-jetpack": "^5.1.0",
     "roboto-fontface": "*",
     "ts-loader": "~8.2.0",
     "vue": "^2.6.14",
