@@ -1,5 +1,5 @@
 <template>
-  <q-footer class="bg-grey-8 text-white">
+  <q-footer class="taskbar text-white">
     <q-toolbar>
       <q-btn flat round dense icon="keyboard_command_key" class="q-mr-sm" />
 

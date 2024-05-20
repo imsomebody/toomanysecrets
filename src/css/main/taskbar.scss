@@ -1,0 +1,10 @@
+@import './tray.scss';
+
+:root {
+  --tms-taskbar-background: #3d3d3d;
+  --tms-taskbar-tray-background: #383838;
+}
+
+.taskbar {
+  background: var(--tms-taskbar-background);
+}

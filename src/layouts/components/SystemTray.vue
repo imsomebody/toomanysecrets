@@ -19,7 +19,15 @@
       v-bind="{ size }"
       id="btn_tray_network"
     >
-      <q-menu fit dark class="no-shadow" anchor="top right" self="bottom right">
+      <q-menu
+        fit
+        dark
+        class="no-shadow tray-menu"
+        anchor="top right"
+        self="bottom right"
+        v-bind="{ offset: menuOffset }"
+        v-model="menuStates.network"
+      >
         <TaskbarNetwork></TaskbarNetwork>
       </q-menu>
     </q-btn>
@@ -40,7 +48,7 @@
 
 <script setup lang="ts">
 import { useNow } from '@vueuse/core';
-import { computed } from 'vue';
+import { computed, reactive } from 'vue';
 
 import TaskbarNetwork from './TaskbarNetwork.vue';
 
@@ -50,4 +58,10 @@ const now = useNow();
 
 const currentTime = computed(() => now.value.toLocaleTimeString());
 const currentDate = computed(() => now.value.toLocaleDateString());
+
+const menuOffset = [-15, 10];
+const menuStates = reactive({
+  network: false,
+  tray: false,
+});
 </script>

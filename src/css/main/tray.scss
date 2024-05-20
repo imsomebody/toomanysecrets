@@ -1,0 +1,14 @@
+.tray-header {
+  font-size: 1.05rem;
+}
+
+.tray-menu {
+  &.q-menu {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    &.q-dark {
+      background: var(--tms-taskbar-tray-background) !important;
+    }
+  }
+}
