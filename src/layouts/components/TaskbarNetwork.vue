@@ -8,12 +8,12 @@
     <div class="column q-pa-sm q-gutter-y-sm">
       <div class="row q-gutter-x-sm">
         <div class="col-4 column-label">Upstream</div>
-        <div class="grow-1">100kbp/s</div>
+        <div class="grow-1">{{ system.context.upstream }}kbp/s</div>
       </div>
 
       <div class="row q-gutter-x-sm">
         <div class="col-4 column-label">Downstream</div>
-        <div class="grow-1">100kbp/s</div>
+        <div class="grow-1">{{ system.context.downstream }}kbp/s</div>
       </div>
     </div>
   </div>
@@ -28,4 +28,10 @@
 }
 </style>
 
-<script setup lang="tsx"></script>
+<script setup lang="tsx">
+import { storeToRefs } from 'pinia';
+import { useNetworkStore } from 'src/stores/network';
+
+const network = useNetworkStore();
+const { system } = storeToRefs(network);
+</script>

@@ -2,32 +2,31 @@ import { defineStore } from 'pinia';
 import { SystemState } from 'src/types/app';
 import { computed, reactive } from 'vue';
 
-type System<T> = {
+type System<TExtras> = {
   id: string;
-} & T;
+  context: TExtras & { enabled: boolean };
+};
 type Systems<T> = {
   [systemId: string]: System<T>;
 };
-
-type MandatorySystemProps = { context: { enabled: boolean } };
 
 export const useSystemStore = defineStore('system', () => {
   const state: SystemState = reactive({
     pastBoot: false,
   });
 
-  const systems: Systems<MandatorySystemProps> = reactive({});
+  const systems: Systems<unknown> = reactive({});
 
   const getSystemById = computed(() => (systemId: string) => {
     return systems[systemId] || null;
   });
 
-  function addSystem<T extends MandatorySystemProps>(system: System<T>) {
+  function addSystem<T>(system: System<T>) {
     systems[system.id] = system;
 
     return computed({
       get() {
-        return getSystemById.value(system.id);
+        return getSystemById.value(system.id) as System<T>;
       },
       set(v) {
         systems[v.id] = v;
