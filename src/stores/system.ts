@@ -2,21 +2,21 @@ import { defineStore } from 'pinia';
 import { SystemState } from 'src/types/app';
 import { computed, reactive } from 'vue';
 
-type SystemIcon = {
+export type SystemIcon = {
   type: 'md';
   value: string;
 };
-type SystemDefaults = {
+export type SystemDefaults = {
   enabled: boolean;
   tray: boolean;
   icon: SystemIcon | null;
 };
 
-type System<TExtras> = {
+export type System<TExtras> = {
   id: string;
   context: TExtras & SystemDefaults;
 };
-type Systems<T> = {
+export type Systems<T> = {
   [systemId: string]: System<T>;
 };
 

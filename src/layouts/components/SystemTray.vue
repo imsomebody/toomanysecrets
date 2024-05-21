@@ -18,7 +18,7 @@
         v-bind="{ offset: menuOffset }"
         v-model="menuStates.tray"
       >
-        <TaskbarTray></TaskbarTray>
+        <TaskbarTray v-model="menuStates.tray"></TaskbarTray>
       </q-menu>
     </q-btn>
 
