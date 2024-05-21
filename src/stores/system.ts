@@ -2,9 +2,19 @@ import { defineStore } from 'pinia';
 import { SystemState } from 'src/types/app';
 import { computed, reactive } from 'vue';
 
+type SystemIcon = {
+  type: 'md';
+  value: string;
+};
+type SystemDefaults = {
+  enabled: boolean;
+  tray: boolean;
+  icon: SystemIcon | null;
+};
+
 type System<TExtras> = {
   id: string;
-  context: TExtras & { enabled: boolean };
+  context: TExtras & SystemDefaults;
 };
 type Systems<T> = {
   [systemId: string]: System<T>;
@@ -17,14 +27,19 @@ export const useSystemStore = defineStore('system', () => {
 
   const systems: Systems<unknown> = reactive({});
 
+  const getSystems = computed(() => Object.values(systems));
+
   const getSystemById = computed(() => (systemId: string) => {
     return systems[systemId] || null;
   });
+  const getTraySystems = computed(() =>
+    getSystems.value.filter((system) => system.context.tray)
+  );
 
   function addSystem<T>(system: System<T>) {
     systems[system.id] = system;
 
-    return computed({
+    return computed<System<T>>({
       get() {
         return getSystemById.value(system.id) as System<T>;
       },
@@ -38,12 +53,20 @@ export const useSystemStore = defineStore('system', () => {
    * Starts the boot.
    */
   function boot() {
+    if (state.pastBoot) {
+      throw new ReferenceError('The system has already booted.');
+    }
+
     console.warn('We should implement the bood sequence feed.');
     state.pastBoot = true;
   }
 
+  boot();
+
   return {
     getSystemById,
+    getSystems,
+    getTraySystems,
 
     addSystem,
     boot,

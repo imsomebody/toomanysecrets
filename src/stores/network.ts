@@ -10,10 +10,14 @@ type NetworkContext = {
 
 export const useNetworkStore = defineStore('systems.network', () => {
   const systemStore = useSystemStore();
+
   const system = systemStore.addSystem<NetworkContext>({
     id: 'network',
     context: {
       enabled: true,
+      tray: false,
+      icon: null,
+
       downstream: 100,
       upstream: 50,
     },

@@ -8,7 +8,19 @@
       icon="arrow_drop_up"
       v-bind="{ size }"
       id="btn_tray_general"
-    />
+    >
+      <q-menu
+        fit
+        dark
+        class="no-shadow tray-menu"
+        anchor="top right"
+        self="bottom right"
+        v-bind="{ offset: menuOffset }"
+        v-model="menuStates.tray"
+      >
+        <TaskbarTray></TaskbarTray>
+      </q-menu>
+    </q-btn>
 
     <q-btn
       class="tray-btn"
@@ -39,18 +51,12 @@
   </div>
 </template>
 
-<style lang="scss">
-.tray-btn {
-  width: 29px;
-  height: 29px;
-}
-</style>
-
 <script setup lang="ts">
 import { useNow } from '@vueuse/core';
 import { computed, reactive } from 'vue';
 
 import TaskbarNetwork from './TaskbarNetwork.vue';
+import TaskbarTray from './TaskbarTray.vue';
 
 const size = 'sm';
 
